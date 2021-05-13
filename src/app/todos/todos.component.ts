@@ -35,6 +35,7 @@ export class TodosComponent implements OnInit {
 
   ngOnInit(): void {
     this.todos = this.service.getAllTodos();
+    this.elementosSelecionados = this.todos
   }
 
   onFormSubmit(form: NgForm) {
