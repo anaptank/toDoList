@@ -1,6 +1,6 @@
 <div style="display: flex; place-content: center;">
-  <h1 style="font-family: 'Dancing Script', cursive; font-size: 50px; margin-bottom: 0px;">
-    ToD<span class="material-icons" style="color: #ec488c; font-size: 50px;">task_alt</span>List
+  <h1 style="font-family: 'Courier New', Courier, monospace; font-size: 70px; margin-bottom: 0px;">
+    ToD<span class="material-icons" style="color: #ec488c; font-size: 40px;">task_alt</span>List
   </h1>
 </div>
 
@@ -9,7 +9,7 @@
     <form style="display: flex; flex-direction: row;" (ngSubmit)="onFormSubmit(form)" #form="ngForm">
       <mat-form-field appearance="outline" style="width: 90%;">
         <mat-label>Digite sua tarefa aqui...</mat-label>
-        <input matInput ngModel required minlength="2" id="text" (keypress)="pressEnter()" type="text" placeholder="Digite sua tarefa aqui..." name="text">
+        <input matInput ngModel autocomplete="off" minlength="2" id="text" (keypress)="pressEnter()" type="text" placeholder="Digite sua tarefa aqui..." name="text">
       </mat-form-field>
 
       <button mat-raised-button id="botaoAdd" type="submit" style="width: auto;" class="alt-gradient-button" >ADICIONAR</button>

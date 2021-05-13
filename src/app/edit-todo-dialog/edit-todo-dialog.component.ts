@@ -38,5 +38,6 @@ export class EditTodoDialogComponent implements OnInit {
     }
     
     this.dialogRef.close(updatedTodo);
+    
   }
 }
