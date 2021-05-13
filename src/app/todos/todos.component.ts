@@ -20,68 +20,88 @@ import { TodoService } from '../shared/todo.service';
 @Component({
   selector: 'app-todos',
   templateUrl: './todos.component.html',
-  styleUrls: ['./todos.component.scss']
+  styleUrls: ['./todos.component.scss'],
 })
 export class TodosComponent implements OnInit {
   elementosSelecionados = [];
-  todos: Todo[]
-  showValidationErrors: boolean
+  todos: Todo[];
+  showValidationErrors: boolean;
 
-  constructor(private service: TodoService, private dialog: MatDialog) { }
+  constructor(private service: TodoService, private dialog: MatDialog) {}
 
   dialogPosition: DialogPosition = {
-    top: '180px'
+    top: '180px',
   };
 
   ngOnInit(): void {
-    this.todos = this.service.getAllTodos()
+    this.todos = this.service.getAllTodos();
   }
 
-  onFormSubmit(form: NgForm) {   
-    if (form.invalid) return this.showValidationErrors = true
+  onFormSubmit(form: NgForm) {
+    if (form.invalid) return (this.showValidationErrors = true);
 
-    this.service.addTodo(new Todo(form.value.text))
+    this.service.addTodo(new Todo(form.value.text));
 
-    this.showValidationErrors = false
-    form.reset()
+    this.showValidationErrors = false;
+    form.reset();
   }
 
   editTodo(todo: Todo) {
-    const index = this.todos.indexOf(todo)
+    const index = this.todos.indexOf(todo);
 
     let dialogRef = this.dialog.open(EditTodoDialogComponent, {
       width: '700px',
-      data: todo
+      data: todo,
     });
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.service.updateTodo(index, result);
+        
+        if (result.completed) {
+          let arrayOnlyCompletedTodos = [];
+          this.todos.forEach((res) => {
+            if (res.completed) {
+              arrayOnlyCompletedTodos.push(res);
+            }
+          });
+          this.elementosSelecionados = [];
+          this.elementosSelecionados = arrayOnlyCompletedTodos;
+        } else {
+          let arrayNotCompletedTodos = [];
+          this.todos.forEach((res) => { 
+            if (!res.completed) {
+              arrayNotCompletedTodos.push(res);
+            }
+            this.elementosSelecionados = [];
+            this.elementosSelecionados = arrayNotCompletedTodos;
+          });
+        }
       }
-    })
+    });
   }
 
   deleteTodo(todo: Todo) {
-    const index = this.todos.indexOf(todo)
+    const index = this.todos.indexOf(todo);
     this.service.deleteTodo(index);
     let todosArray = [];
 
-    if(todo.completed === true) {
+    if (todo.completed === true) {
       this.elementosSelecionados = [];
-      this.todos.forEach(res => {
-        if(res.completed) {
+      this.todos.forEach((res) => {
+        if (res.completed) {
           todosArray.push(res);
-          this.elementosSelecionados = todosArray
+          this.elementosSelecionados = todosArray;
         }
-      })
+      });
     } else {
       this.elementosSelecionados = [];
-      this.todos.forEach(res => {
-        if(!res.completed) {
+      this.todos.forEach((res) => {
+        if (!res.completed) {
           todosArray.push(res);
-          this.elementosSelecionados = todosArray
+          this.elementosSelecionados = todosArray;
         }
-      })
+      });
     }
   }
 
@@ -113,9 +133,11 @@ export class TodosComponent implements OnInit {
     this.elementosSelecionados = [];
     return (this.elementosSelecionados = todosAtivos);
   }
-  
+
   deleteAllTodos() {
-    this.dialog.open(ConfirmationDialogComponent, { position: this.dialogPosition});
+    this.dialog.open(ConfirmationDialogComponent, {
+      position: this.dialogPosition,
+    });
     this.elementosSelecionados = this.todos;
   }
 
