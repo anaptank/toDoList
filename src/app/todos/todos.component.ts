@@ -25,7 +25,6 @@ import { TodoService } from '../shared/todo.service';
 export class TodosComponent implements OnInit {
   elementosSelecionados = [];
   todos: Todo[];
-  showValidationErrors: boolean;
 
   constructor(private service: TodoService, private dialog: MatDialog) {}
 
