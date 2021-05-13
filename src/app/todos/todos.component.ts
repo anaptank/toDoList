@@ -25,7 +25,6 @@ import { TodoService } from '../shared/todo.service';
 export class TodosComponent implements OnInit {
   elementosSelecionados = [];
   todos: Todo[];
-  showValidationErrors: boolean;
 
   constructor(private service: TodoService, private dialog: MatDialog) {}
 
@@ -39,11 +38,7 @@ export class TodosComponent implements OnInit {
   }
 
   onFormSubmit(form: NgForm) {
-    if (form.invalid) return (this.showValidationErrors = true);
-
     this.service.addTodo(new Todo(form.value.text));
-
-    this.showValidationErrors = false;
     form.reset();
   }
 
