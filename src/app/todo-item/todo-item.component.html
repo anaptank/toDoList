@@ -1,1 +1,12 @@
-<p>todo-item works!</p>
+<div style="display: flex; flex-direction: row; " (click)="onTodoClicked()">
+  <span style="text-align: justify; word-wrap: break-word;">
+    <mat-checkbox [checked]="todo.completed" style="margin-right: 10px;" (change)="eventCheckbox($event.checked, todo)">
+    </mat-checkbox>
+  </span>
+  <span style="width: 550px; text-align: justify; margin-right: 10px;">{{todo.text}}</span>
+  
+  <span style="display: flex;">
+    <mat-icon style="cursor: pointer; margin-left: 15px; color: #ec488c" (click)="onEditClicked()">edit</mat-icon> 
+    <mat-icon style="cursor: pointer; color: #ec488c;" (click)="onDeleteClicked()">delete_forever</mat-icon> 
+  </span>
+</div>

@@ -1,0 +1,21 @@
+.card {
+  max-width: 700px;
+  margin: auto;
+  margin-top: 20px;
+}
+
+#botaoAdd {
+  display: flex;
+  width: 15%;
+  height: 15%;
+  border-radius: 5px;
+  margin-top: 22px;
+  margin-left: 15px;
+}
+
+.mat-checkbox-layout {
+  display: flex;
+  border: 2px solid #eee;
+  border-radius: 50% !important;
+
+}
